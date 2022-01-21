@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Contracts", "RealEstate.Properties.Contracts\RealEstate.Properties.Contracts.csproj", "{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Tests", "RealEstate.Properties.Tests\RealEstate.Properties.Tests.csproj", "{BA18CAE8-5ECE-48FF-9EB6-09D186E117A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA18CAE8-5ECE-48FF-9EB6-09D186E117A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA18CAE8-5ECE-48FF-9EB6-09D186E117A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA18CAE8-5ECE-48FF-9EB6-09D186E117A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA18CAE8-5ECE-48FF-9EB6-09D186E117A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
