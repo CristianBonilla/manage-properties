@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{6CBF2997-BB09-4DBE-B839-E70FD49C88CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A77DE514-7805-424A-BAD8-356545234A09}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.API", "RealEstate.Properties.API\RealEstate.Properties.API.csproj", "{084E4AC7-D328-4432-AED9-2A29CC61E166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Infrastructure", "RealEstate.Properties.Infrastructure\RealEstate.Properties.Infrastructure.csproj", "{D3474427-78CF-41BC-B7EE-F8F97A9375F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Domain", "RealEstate.Properties.Domain\RealEstate.Properties.Domain.csproj", "{3626BA1E-E177-460B-8656-E8508E9D26D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Domain.Entities", "RealEstate.Properties.Domain.Entities\RealEstate.Properties.Domain.Entities.csproj", "{4F0E7DFF-40B4-4B4E-AD04-0611FF071DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Properties.Contracts", "RealEstate.Properties.Contracts\RealEstate.Properties.Contracts.csproj", "{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{084E4AC7-D328-4432-AED9-2A29CC61E166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084E4AC7-D328-4432-AED9-2A29CC61E166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084E4AC7-D328-4432-AED9-2A29CC61E166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084E4AC7-D328-4432-AED9-2A29CC61E166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3474427-78CF-41BC-B7EE-F8F97A9375F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3474427-78CF-41BC-B7EE-F8F97A9375F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3474427-78CF-41BC-B7EE-F8F97A9375F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3474427-78CF-41BC-B7EE-F8F97A9375F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3626BA1E-E177-460B-8656-E8508E9D26D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3626BA1E-E177-460B-8656-E8508E9D26D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3626BA1E-E177-460B-8656-E8508E9D26D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3626BA1E-E177-460B-8656-E8508E9D26D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F0E7DFF-40B4-4B4E-AD04-0611FF071DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F0E7DFF-40B4-4B4E-AD04-0611FF071DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F0E7DFF-40B4-4B4E-AD04-0611FF071DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F0E7DFF-40B4-4B4E-AD04-0611FF071DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4F9ACC-CE36-4EE0-8C83-A34DC4293A22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{084E4AC7-D328-4432-AED9-2A29CC61E166} = {6CBF2997-BB09-4DBE-B839-E70FD49C88CE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {644AA86A-00F7-46BE-800B-11B611BBA71C}
+	EndGlobalSection
+EndGlobal
