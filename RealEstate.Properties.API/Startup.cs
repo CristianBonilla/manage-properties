@@ -1,37 +1,36 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RealEstate.Properties.API.Modules;
+using RealEstate.Properties.API.Options;
+using Autofac;
 
 namespace RealEstate.Properties.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        readonly IWebHostEnvironment env;
 
         public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        {
+            Configuration = configuration;
+            this.env = env;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.InstallServicesFromAssembly(Configuration, env);
+        }
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstate.Properties.API", Version = "v1" });
-            });
+        // Register your own things directly with Autofac here.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<DomainModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +39,10 @@ namespace RealEstate.Properties.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RealEstate.Properties.API v1"));
+
+                SwaggerOptions swagger = Configuration.GetSection(nameof(SwaggerOptions)).Get<SwaggerOptions>();
+                app.UseSwagger(options => options.RouteTemplate = swagger.JsonRoute);
+                app.UseSwaggerUI(c => c.SwaggerEndpoint(swagger.UIEndpoint, swagger.Description));
             }
 
             app.UseHttpsRedirection();

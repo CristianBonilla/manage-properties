@@ -29,7 +29,7 @@ namespace RealEstate.Properties.Domain.EntitiesConfiguration
                 .IsUnicode()
                 .IsRequired();
             builder.Property(property => property.Price)
-                .HasPrecision(18, 6)
+                .HasPrecision(12, 2)
                 .IsRequired();
             builder.Property(property => property.CodeInternal)
                 .IsRequired();

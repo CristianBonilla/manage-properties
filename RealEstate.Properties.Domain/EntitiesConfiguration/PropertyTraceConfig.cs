@@ -27,10 +27,10 @@ namespace RealEstate.Properties.Domain.EntitiesConfiguration
                 .IsUnicode(false)
                 .IsRequired();
             builder.Property(property => property.Value)
-                .HasPrecision(18, 6)
+                .HasPrecision(12, 2)
                 .IsRequired();
             builder.Property(property => property.Tax)
-                .HasPrecision(18, 6)
+                .HasPrecision(12, 2)
                 .IsRequired();
 
             builder.HasOne(one => one.Property)
