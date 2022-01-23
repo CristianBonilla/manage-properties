@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RealEstate.Properties.Domain.Entities;
+using RealEstate.Properties.Domain.SeedWork;
 
 namespace RealEstate.Properties.Domain.EntitiesConfiguration
 {
@@ -35,6 +36,8 @@ namespace RealEstate.Properties.Domain.EntitiesConfiguration
             builder.HasOne(one => one.Property)
                 .WithMany()
                 .HasForeignKey(key => key.PropertyId);
+
+            builder.HasData(SeedData.PropertyTracesSeed);
         }
     }
 }

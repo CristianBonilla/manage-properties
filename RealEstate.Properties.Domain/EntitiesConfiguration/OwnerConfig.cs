@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RealEstate.Properties.Domain.Entities;
+using RealEstate.Properties.Domain.SeedWork;
 
 namespace RealEstate.Properties.Domain.EntitiesConfiguration
 {
@@ -27,10 +28,10 @@ namespace RealEstate.Properties.Domain.EntitiesConfiguration
                 .HasMaxLength(150)
                 .IsUnicode()
                 .IsRequired();
-            builder.Property(property => property.Photo)
-                .IsRequired();
             builder.Property(property => property.Birthday)
                 .IsRequired();
+
+            builder.HasData(SeedData.OwnersSeed);
         }
     }
 }
