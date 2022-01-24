@@ -8,8 +8,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace RealEstate.Properties.API.Installers
 {
+    /// <summary>
+    /// Represents the common installer
+    /// </summary>
     public class CommonInstaller : IInstaller
     {
+        /// <inheritdoc/>
         public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             services.AddControllers()
@@ -27,6 +31,10 @@ namespace RealEstate.Properties.API.Installers
             });
         }
 
+        /// <summary>
+        /// Configures the JSON serializer for the APIs
+        /// </summary>
+        /// <param name="options">JSON format options</param>
         private void JsonSerializer(MvcNewtonsoftJsonOptions options)
         {
             JsonSerializerSettings settings = options.SerializerSettings;

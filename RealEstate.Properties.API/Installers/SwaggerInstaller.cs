@@ -7,8 +7,12 @@ using RealEstate.Properties.API.Options;
 
 namespace RealEstate.Properties.API.Installers
 {
+    /// <summary>
+    /// Represents the Swagger installer
+    /// </summary>
     class SwaggerInstaller : IInstaller
     {
+        /// <inheritdoc/>
         public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             IConfigurationSection swaggerSection = configuration.GetSection(nameof(SwaggerOptions));

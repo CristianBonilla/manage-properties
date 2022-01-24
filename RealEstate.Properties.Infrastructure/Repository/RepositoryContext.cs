@@ -9,32 +9,32 @@ namespace RealEstate.Properties.Infrastructure.Repository
     /// <inheritdoc cref="IRepositoryContext{TContext}"/>
     public class RepositoryContext<TContext> : IRepositoryContext<TContext> where TContext : DbContext
     {
-        readonly TContext context;
-        bool disposed = false;
+        readonly TContext _context;
+        bool _disposed = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RepositoryContext{TContext}"/> class
         /// </summary>
         /// <param name="context">Context</param>
-        public RepositoryContext(TContext context) => this.context = context;
+        public RepositoryContext(TContext context) => _context = context;
 
         /// <inheritdoc/>
         public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
         {
-            return context.Entry(entity);
+            return _context.Entry(entity);
         }
 
         /// <inheritdoc/>
         public DbSet<TEntity> Set<TEntity>() where TEntity : class
         {
-            return context.Set<TEntity>();
+            return _context.Set<TEntity>();
         }
 
         /// <inheritdoc/>
-        public int Save() => context.SaveChanges();
+        public int Save() => _context.SaveChanges();
 
         /// <inheritdoc/>
-        public Task<int> SaveAsync() => context.SaveChangesAsync();
+        public Task<int> SaveAsync() => _context.SaveChangesAsync();
 
         /// <inheritdoc/>
         public void Dispose()
@@ -50,13 +50,13 @@ namespace RealEstate.Properties.Infrastructure.Repository
         /// <param name="disposing">Disposing</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
                 return;
 
             if (disposing)
-                context.Dispose();
+                _context.Dispose();
 
-            disposed = true;
+            _disposed = true;
         }
     }
 }

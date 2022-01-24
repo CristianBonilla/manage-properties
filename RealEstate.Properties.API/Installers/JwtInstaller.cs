@@ -9,8 +9,12 @@ using RealEstate.Properties.API.Options;
 
 namespace RealEstate.Properties.API.Installers
 {
+    /// <summary>
+    /// Represents the JWT installer
+    /// </summary>
     public class JwtInstaller : IInstaller
     {
+        /// <inheritdoc/>
         public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             IConfigurationSection jwtSection = configuration.GetSection(nameof(JwtOptions));

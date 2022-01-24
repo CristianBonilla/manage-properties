@@ -6,8 +6,12 @@ using RealEstate.Properties.Domain.Context;
 
 namespace RealEstate.Properties.API.Installers
 {
+    /// <summary>
+    /// Represents the DB installer
+    /// </summary>
     class DbInstaller : IInstaller
     {
+        /// <inheritdoc/>
         public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             string connectionString = configuration.GetConnectionString(CommonValues.PropertiesConnection);
