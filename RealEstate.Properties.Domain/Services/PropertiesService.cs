@@ -77,7 +77,12 @@ namespace RealEstate.Properties.Domain.Services
         }
 
         /// <inheritdoc/>
-        public async IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties()
+        public async IAsyncEnumerable<(
+            OwnerEntity,
+            PropertyEntity,
+            PropertyImageEntity,
+            PropertyTraceEntity)>
+            GetProperties()
         {
             var owners = _ownerRepository.Get().ToAsyncEnumerable();
             await foreach (OwnerEntity owner in owners)
@@ -94,7 +99,12 @@ namespace RealEstate.Properties.Domain.Services
         }
 
         /// <inheritdoc/>
-        public async IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties(string text)
+        public async IAsyncEnumerable<(
+            OwnerEntity,
+            PropertyEntity,
+            PropertyImageEntity,
+            PropertyTraceEntity)>
+            GetProperties(string text)
         {
             var properties = GetProperties();
             await foreach (var (owner, property, propertyImage, propertyTrace) in properties)
