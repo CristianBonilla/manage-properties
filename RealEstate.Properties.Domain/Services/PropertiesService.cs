@@ -1,8 +1,10 @@
 using System;
 using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using RealEstate.Properties.Domain.Context;
+using RealEstate.Properties.Domain.Helpers;
 using RealEstate.Properties.Domain.Entities;
 using RealEstate.Properties.Domain.Repositories;
 using RealEstate.Properties.Contracts.Services;
@@ -75,15 +77,45 @@ namespace RealEstate.Properties.Domain.Services
         }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties()
+        public async IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties()
         {
-            throw new NotImplementedException();
+            var owners = _ownerRepository.Get().ToAsyncEnumerable();
+            await foreach (OwnerEntity owner in owners)
+            {
+                var properties = _propertyRepository.Get(property => property.OwnerId == owner.OwnerId).ToAsyncEnumerable();
+                await foreach(PropertyEntity property in properties)
+                {
+                    PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == property.PropertyId);
+                    PropertyTraceEntity propertyTrace = _propertyTraceRepository.Find(propertyTrace => propertyTrace.PropertyId == property.PropertyId);
+
+                    yield return (owner, property, propertyImage, propertyTrace);
+                }
+            }
         }
 
         /// <inheritdoc/>
-        public IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties(string text)
+        public async IAsyncEnumerable<(OwnerEntity, PropertyEntity, PropertyImageEntity, PropertyTraceEntity)> GetProperties(string text)
         {
-            throw new NotImplementedException();
+            var properties = GetProperties();
+            await foreach (var (owner, property, propertyImage, propertyTrace) in properties)
+            {
+                bool ownerMatch = MatchesHelper.HasMatches(owner, text, owner => owner.Name);
+                bool propertyMatch = MatchesHelper.HasMatches(
+                    property,
+                    text,
+                    property => property.Name,
+                    property => property.CodeInternal,
+                    property => property.Price,
+                    property => property.Year);
+                bool propertyTraceMatch = MatchesHelper.HasMatches(
+                    propertyTrace,
+                    text,
+                    propertyTrace => propertyTrace.Name,
+                    propertyTrace => propertyTrace.Value,
+                    propertyTrace => propertyTrace.Tax);
+                if (ownerMatch || propertyMatch || propertyTraceMatch)
+                    yield return (owner, property, propertyImage, propertyTrace);
+            }
         }
     }
 }
