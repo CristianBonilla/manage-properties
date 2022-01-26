@@ -1,7 +1,7 @@
 using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
+using System.Linq.Expressions;
+using RealEstate.Properties.Domain.Extensions;
 
 namespace RealEstate.Properties.Domain.Helpers
 {
@@ -29,7 +29,7 @@ namespace RealEstate.Properties.Domain.Helpers
                 object propertyValue = property.GetValue(obj, null);
                 if (propertyValue == null)
                     continue;
-                bool isIncluded = includedProperties.Any(expression => expression.Equals(property));
+                bool isIncluded = includedProperties.IsPropertyIncluded(property);
                 Type propertyType = property.PropertyType;
                 if (!isIncluded || propertyType != typeof(string) && !propertyType.IsValueType)
                     continue;
