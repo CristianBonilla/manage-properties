@@ -24,7 +24,9 @@ namespace RealEstate.Properties.API.Mappings
             CreateMap<PropertyEntity, PropertyRequest>();
             CreateMap<PropertyEntity, PropertyResponse>();
             CreateMap<PropertyImageEntity, PropertyImageRequest>();
+            CreateMap<PropertyImageEntity, PropertyImageResponse>();
             CreateMap<PropertyTraceEntity, PropertyTraceRequest>();
+            CreateMap<PropertyTraceEntity, PropertyTraceResponse>();
             CreateMap<IAsyncEnumerable<(
                 OwnerEntity,
                 PropertyEntity,

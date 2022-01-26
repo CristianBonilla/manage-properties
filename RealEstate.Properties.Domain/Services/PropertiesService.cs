@@ -57,7 +57,13 @@ namespace RealEstate.Properties.Domain.Services
         {
             PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == propertyId);
             if (propertyImage == null)
-                throw new ServiceErrorException(HttpStatusCode.NotFound, "Property image not found with related property identifier");
+            {
+                propertyImage = new()
+                {
+                    PropertyId = propertyId,
+                    Enabled = true
+                };
+            }
             propertyImage.File = image;
             await _context.SaveAsync();
 
