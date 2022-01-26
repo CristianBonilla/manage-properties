@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +15,19 @@ namespace RealEstate.Properties.API.Installers
     /// </summary>
     class SwaggerInstaller : IInstaller
     {
+        /// <summary>
+        /// Get the path of the xml file for comments
+        /// </summary>
+        static string XmlCommentsFilePath
+        {
+            get
+            {
+                string xmlFilename = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                return Path.Combine(DataDirectoryConfig.DirectoryPath, xmlFilename);
+            }
+        }
+
         /// <inheritdoc/>
         public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -45,6 +61,7 @@ namespace RealEstate.Properties.API.Installers
                     }
                 };
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement { { apiSecurity, new List<string>() } });
+                options.IncludeXmlComments(XmlCommentsFilePath);
             });
         }
     }

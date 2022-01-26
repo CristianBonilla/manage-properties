@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RealEstate.Properties.API</name>
+    </assembly>
+    <members>
+        <member name="T:RealEstate.Properties.API.Controllers.PropertiesController">
+            <summary>
+            Controller who is responsible for offering property services
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.#ctor(AutoMapper.IMapper,RealEstate.Properties.Contracts.Services.IPropertiesService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RealEstate.Properties.API.Controllers.PropertiesController"/> class
+            </summary>
+            <param name="mapper">Auto mapper</param>
+            <param name="service">Properties service</param>
+        </member>
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.GetProperties">
+            <summary>
+            Get the list of properties with the necessary data
+            </summary>
+            <returns>Properties filter</returns>
+            <response code="200">Successful to get all available properties</response>
+            <response code="500">Internal server error not getting properties list</response>
+        </member>
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.GetProperties(System.String)">
+            <summary>
+            Get the list of filtered properties with the necessary data
+            </summary>
+            <param name="text">Text to match</param>
+            <returns>Properties filter</returns>
+            <response code="200">Successfully to get all available properties filtered</response>
+            <response code="500">Internal server error not getting list of filtered properties</response>
+        </member>
+        <member name="T:RealEstate.Properties.API.DataDirectoryConfig">
+            <summary>
+            Provides the configure operation of the main directory of the data store
+            </summary>
+        </member>
+        <member name="P:RealEstate.Properties.API.DataDirectoryConfig.DirectoryPath">
+            <summary>
+            Gets the current directory inside the assembly
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.DataDirectoryConfig.SetDataDirectoryPath(System.String@)">
+            <summary>
+            Sets the path of the database directory from the connection string
+            </summary>
+            <param name="connectionString">Connection string</param>
+        </member>
+        <member name="T:RealEstate.Properties.API.InstallerExtensions">
+            <summary>
+            Installer extensions
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.InstallerExtensions.InstallServicesFromAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Provides how installers should be automatically initialized
+            </summary>
+            <param name="services">Collection to establish new services</param>
+            <param name="configuration">Key and value properties configuration</param>
+            <param name="env">Gets the running environment variables of the application</param>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.CommonInstaller">
+            <summary>
+            Represents the common installer
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.CommonInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.CommonInstaller.JsonSerializer(Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions)">
+            <summary>
+            Configures the JSON serializer for the APIs
+            </summary>
+            <param name="options">JSON format options</param>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.DbInstaller">
+            <summary>
+            Represents the DB installer
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.DbInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.IInstaller">
+            <summary>
+            Represents the installer for specific features, via dependencies injection
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.IInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Sets the services to be installed specifically
+            </summary>
+            <param name="services">Collection to establish new services</param>
+            <param name="configuration">Key and value properties configuration</param>
+            <param name="env">Gets the running environment variables of the application</param>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.JwtInstaller">
+            <summary>
+            Represents the JWT installer
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.JwtInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.MapperInstaller">
+            <summary>
+            Represents the mapper installer
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.MapperInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RealEstate.Properties.API.Installers.SwaggerInstaller">
+            <summary>
+            Represents the Swagger installer
+            </summary>
+        </member>
+        <member name="P:RealEstate.Properties.API.Installers.SwaggerInstaller.XmlCommentsFilePath">
+            <summary>
+            Get the path of the xml file for comments
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Installers.SwaggerInstaller.InstallServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RealEstate.Properties.API.Mappings.Converters.PropertiesFilterConverter">
+            <summary>
+            Mapping converter between tuple and properties filter response class
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Mappings.Converters.PropertiesFilterConverter.Convert(System.Collections.Generic.IAsyncEnumerable{System.ValueTuple{RealEstate.Properties.Domain.Entities.OwnerEntity,RealEstate.Properties.Domain.Entities.PropertyEntity,RealEstate.Properties.Domain.Entities.PropertyImageEntity,RealEstate.Properties.Domain.Entities.PropertyTraceEntity}},System.Collections.Generic.IAsyncEnumerable{RealEstate.Properties.Contracts.DTO.Property.PropertiesFilter},AutoMapper.ResolutionContext)">
+            <summary>
+            Convert the tuple to the properties filter class, iterating asynchronously
+            </summary>
+            <param name="source">Properties class tuple</param>
+            <param name="destination">Properties filter</param>
+            <param name="context">Resolution context</param>
+            <returns>Properties filter converted</returns>
+        </member>
+        <member name="T:RealEstate.Properties.API.Mappings.MapperStart">
+            <summary>
+            Initialize the mapping configuration
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Mappings.MapperStart.Build">
+            <summary>
+            Set the necessary configuration for the mappings
+            </summary>
+            <returns>Mapper configuration</returns>
+        </member>
+        <member name="T:RealEstate.Properties.API.Mappings.PropertiesProfile">
+            <summary>
+            Property profile to create maps, based on entities
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Mappings.PropertiesProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RealEstate.Properties.API.Mappings.PropertiesProfile"/> class
+            </summary>
+        </member>
+        <member name="T:RealEstate.Properties.API.Modules.DomainModule">
+            <summary>
+            Provide necessary injections for the domain, during runtime
+            </summary>
+        </member>
+        <member name="M:RealEstate.Properties.API.Modules.DomainModule.Load(Autofac.ContainerBuilder)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

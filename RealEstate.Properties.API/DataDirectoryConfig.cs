@@ -8,18 +8,22 @@ namespace RealEstate.Properties.API
     /// </summary>
     class DataDirectoryConfig
     {
-        const string DataDirectory = "[DataDirectory]";
-        private static readonly string directory;
+        const string DATA_DIRECTORY = "[DataDirectory]";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataDirectoryConfig"/> class
+        /// Gets the current directory inside the assembly
         /// </summary>
-        static DataDirectoryConfig()
+        public static string DirectoryPath
         {
-            string baseDirectory = Directory.GetCurrentDirectory();
-            int lastIndex = baseDirectory.ToLower().LastIndexOf(@"bin\debug\");
-            int length = lastIndex >= 0 ? lastIndex : baseDirectory.Length;
-            directory = baseDirectory.Substring(0, length);
+            get
+            {
+                string baseDirectory = Directory.GetCurrentDirectory();
+                int lastIndex = baseDirectory.ToLower().LastIndexOf(@"bin\debug\");
+                int length = lastIndex >= 0 ? lastIndex : baseDirectory.Length;
+                string directory = baseDirectory.Substring(0, length);
+
+                return directory;
+            }
         }
 
         /// <summary>
@@ -31,11 +35,11 @@ namespace RealEstate.Properties.API
             if (string.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException(nameof(connectionString), "The connection string should be defined");
 
-            string appDataPath = Path.Combine(directory, "App_Data");
+            string appDataPath = Path.Combine(DirectoryPath, "App_Data");
             if (!Directory.Exists(appDataPath))
                 Directory.CreateDirectory(appDataPath);
             connectionString = connectionString.Replace(
-                DataDirectory,
+                DATA_DIRECTORY,
                 appDataPath,
                 StringComparison.OrdinalIgnoreCase);
         }

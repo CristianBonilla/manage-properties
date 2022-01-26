@@ -15,7 +15,7 @@ namespace RealEstate.Properties.Domain.Services
     /// <inheritdoc cref="IPropertiesService"/>
     public class PropertiesService : IPropertiesService
     {
-        readonly IPropertiesContext _context;
+        readonly IPropertiesRepositoryContext _context;
         readonly IOwnerRepository _ownerRepository;
         readonly IPropertyRepository _propertyRepository;
         readonly IPropertyImageRepository _propertyImageRepository;
@@ -30,7 +30,7 @@ namespace RealEstate.Properties.Domain.Services
         /// <param name="propertyImageRepository">Property image repository</param>
         /// <param name="propertyTraceRepository">Property trace repository</param>
         public PropertiesService(
-            IPropertiesContext context,
+            IPropertiesRepositoryContext context,
             IOwnerRepository ownerRepository,
             IPropertyRepository propertyRepository,
             IPropertyImageRepository propertyImageRepository,

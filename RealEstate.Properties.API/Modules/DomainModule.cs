@@ -1,8 +1,10 @@
+using Autofac;
 using RealEstate.Properties.Domain.Services;
 using RealEstate.Properties.Contracts.Repository;
 using RealEstate.Properties.Contracts.Services;
 using RealEstate.Properties.Infrastructure.Repository;
-using Autofac;
+using RealEstate.Properties.Domain.Context;
+using RealEstate.Properties.Domain.Repositories;
 
 namespace RealEstate.Properties.API.Modules
 {
@@ -19,6 +21,23 @@ namespace RealEstate.Properties.API.Modules
                 .InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Repository<,>))
                 .As(typeof(IRepository<,>))
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PropertiesRepositoryContext>()
+                .As<IPropertiesRepositoryContext>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<OwnerRepository>()
+                .As<IOwnerRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<PropertyRepository>()
+                .As<IPropertyRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<PropertyImageRepository>()
+                .As<IPropertyImageRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<PropertyTraceRepository>()
+                .As<IPropertyTraceRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<PropertiesService>()
