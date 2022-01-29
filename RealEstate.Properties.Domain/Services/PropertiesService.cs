@@ -115,15 +115,15 @@ namespace RealEstate.Properties.Domain.Services
             var properties = GetProperties();
             await foreach (var (owner, property, propertyImage, propertyTrace) in properties)
             {
-                bool ownerMatch = MatchesHelper.HasMatches(owner, text, owner => owner.Name);
-                bool propertyMatch = MatchesHelper.HasMatches(
+                bool ownerMatch = MatchesHelper.MatchesByText(owner, text, owner => owner.Name);
+                bool propertyMatch = MatchesHelper.MatchesByText(
                     property,
                     text,
                     property => property.Name,
                     property => property.CodeInternal,
                     property => property.Price,
                     property => property.Year);
-                bool propertyTraceMatch = MatchesHelper.HasMatches(
+                bool propertyTraceMatch = MatchesHelper.MatchesByText(
                     propertyTrace,
                     text,
                     propertyTrace => propertyTrace.Name,

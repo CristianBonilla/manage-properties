@@ -22,7 +22,9 @@ namespace RealEstate.Properties.API.Mappings
             CreateMap<OwnerEntity, OwnerRequest>();
             CreateMap<OwnerEntity, OwnerResponse>();
             CreateMap<PropertyEntity, PropertyRequest>();
-            CreateMap<PropertyEntity, PropertyResponse>();
+            CreateMap<PropertyEntity, PropertyResponse>()
+                .ForMember(member => member.PropertyImageId, options => options.Ignore())
+                .ForMember(member => member.PropertyTraces, options => options.Ignore());
             CreateMap<PropertyImageEntity, PropertyImageRequest>();
             CreateMap<PropertyImageEntity, PropertyImageResponse>();
             CreateMap<PropertyTraceEntity, PropertyTraceRequest>();

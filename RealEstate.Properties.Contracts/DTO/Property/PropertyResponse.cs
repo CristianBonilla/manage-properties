@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using RealEstate.Properties.Contracts.DTO.PropertyTrace;
 
 namespace RealEstate.Properties.Contracts.DTO.Property
 {
@@ -11,6 +14,11 @@ namespace RealEstate.Properties.Contracts.DTO.Property
         /// Property identifier
         /// </summary>
         public Guid PropertyId { get; set; }
+
+        /// <summary>
+        /// Property image identifier
+        /// </summary>
+        public Guid? PropertyImageId { get; set; }
 
         /// <summary>
         /// Property owner identifier
@@ -41,5 +49,10 @@ namespace RealEstate.Properties.Contracts.DTO.Property
         /// Property year
         /// </summary>
         public int Year { get; set; }
+
+        /// <summary>
+        /// Property traces
+        /// </summary>
+        public IEnumerable<PropertyTraceResponse> PropertyTraces { get; set; } = Enumerable.Empty<PropertyTraceResponse>();
     }
 }
