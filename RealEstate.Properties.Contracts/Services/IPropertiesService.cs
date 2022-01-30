@@ -18,12 +18,11 @@ namespace RealEstate.Properties.Contracts.Services
         Task<PropertyEntity> AddProperty(PropertyEntity property);
 
         /// <summary>
-        /// Adds the property image directly to the database
+        /// Update the property image directly to the database
         /// </summary>
         /// <param name="propertyId">Property identifier</param>
         /// <param name="image">Image byte array</param>
-        /// <returns>Property image added</returns>
-        Task<PropertyImageEntity> AddPropertyImage(Guid propertyId, byte[] image);
+        Task UpdatePropertyImage(Guid propertyId, byte[] image);
 
         /// <summary>
         /// Changes the property price directly in the database
@@ -31,7 +30,14 @@ namespace RealEstate.Properties.Contracts.Services
         /// <param name="propertyId">Property identifier</param>
         /// <param name="price">Price to change</param>
         /// <returns>Property with the price changed</returns>
-        Task<PropertyEntity> EditPropertyPrice(Guid propertyId, decimal price);
+        Task<PropertyEntity> UpdatePropertyPrice(Guid propertyId, decimal price);
+
+        /// <summary>
+        /// Find property image by property identifier
+        /// </summary>
+        /// <param name="propertyId">Property identifier</param>
+        /// <returns>Property image found</returns>
+        PropertyImageEntity FindPropertyImage(Guid propertyId);
 
         /// <summary>
         /// Get all matching properties
@@ -55,5 +61,12 @@ namespace RealEstate.Properties.Contracts.Services
             PropertyImageEntity,
             PropertyTraceEntity)>
             GetProperties(string text);
+
+        /// <summary>
+        /// Get property traces by property identifier
+        /// </summary>
+        /// <param name="propertyId">Property identifier</param>
+        /// <returns>Property traces</returns>
+        IAsyncEnumerable<PropertyTraceEntity> GetTracesByProperty(Guid propertyId);
     }
 }

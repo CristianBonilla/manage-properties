@@ -42,23 +42,23 @@
             <response code="201">Successfully for property created</response>
             <response code="500">Internal server error not creating property</response>
         </member>
-        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.AddPropertyImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.UpdatePropertyImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
-            Add the property image based on the received property identifier
+            Update the property image based on the received property identifier
             </summary>
             <param name="propertyId">Property identifier</param>
             <param name="image">Property image</param>
             <returns>Property image response</returns>
-            <response code="201">Successfully to add the property image</response>
-            <response code="500">Internal server error not creating property image</response>
+            <response code="201">Successfully to update the property image</response>
+            <response code="500">Internal server error not updating property image</response>
         </member>
-        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.EditPropertyPrice(System.Guid,System.Decimal)">
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.UpdatePropertyPrice(System.Guid,System.Decimal)">
             <summary>
-            Edit the price of the property, based on the property identifier
+            Update the price of the property, based on the property identifier
             </summary>
             <param name="propertyId">Property identifier</param>
             <param name="price">Property price</param>
-            <returns>Property edited</returns>
+            <returns>Property updated</returns>
             <response code="200">Successfully updated property price</response>
             <response code="404">Property not found by identifier, to update the price</response>
             <response code="500">Internal server error not updating property price</response>

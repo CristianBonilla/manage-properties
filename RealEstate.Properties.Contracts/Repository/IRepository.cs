@@ -79,30 +79,24 @@ namespace RealEstate.Properties.Contracts.Repository
         bool Exists(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
-        /// Get all entities
+        /// Get all entities including navigation properties
         /// </summary>
+        /// <param name="includes">Included properties</param>
         /// <returns>Entities</returns>
-        IEnumerable<TEntity> Get();
+        IEnumerable<TEntity> Get(params Expression<Func<TEntity, bool>>[] includes);
 
         /// <summary>
         /// Get all entities based on received filter
         /// </summary>
         /// <param name="filter">Filter</param>
         /// <returns>Filtered entities</returns>
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter);
+        IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
         /// Get all entities according to the order received
         /// </summary>
         /// <param name="orderBy">Order by</param>
         /// <returns>Ordered entities</returns>
-        IEnumerable<TEntity> Get(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy);
-
-        /// <summary>
-        /// Get all entities including navigation properties
-        /// </summary>
-        /// <param name="includes">Included properties</param>
-        /// <returns>Entities</returns>
-        IEnumerable<TEntity> Get(params Expression<Func<TEntity, bool>>[] includes);
+        IEnumerable<TEntity> GetByOrder(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy);
     }
 }

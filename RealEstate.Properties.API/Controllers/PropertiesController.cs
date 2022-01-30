@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using AutoMapper;
 using RealEstate.Properties.Domain.Entities;
 using RealEstate.Properties.Contracts.Services;
 using RealEstate.Properties.Contracts.DTO.Property;
+using RealEstate.Properties.Contracts.DTO.PropertyTrace;
 
 namespace RealEstate.Properties.API.Controllers
 {
@@ -82,34 +84,34 @@ namespace RealEstate.Properties.API.Controllers
         }
 
         /// <summary>
-        /// Add the property image based on the received property identifier
+        /// Update the property image based on the received property identifier
         /// </summary>
         /// <param name="propertyId">Property identifier</param>
         /// <param name="image">Property image</param>
         /// <returns>Property image response</returns>
-        /// <response code="201">Successfully to add the property image</response>
-        /// <response code="500">Internal server error not creating property image</response>
-        [HttpPost("image/{propertyId}")]
+        /// <response code="201">Successfully to update the property image</response>
+        /// <response code="500">Internal server error not updating property image</response>
+        [HttpPut("image/{propertyId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AddPropertyImage(Guid propertyId, IFormFile image)
+        public async Task<IActionResult> UpdatePropertyImage(Guid propertyId, IFormFile image)
         {
             if (image.Length <= 0)
                 return StatusCode(StatusCodes.Status500InternalServerError, "There is no image to process");
             using MemoryStream memoryStream = new();
             await image.CopyToAsync(memoryStream);
             byte[] imageBytes = memoryStream.ToArray();
-            PropertyImageEntity propertyImage = await _service.AddPropertyImage(propertyId, imageBytes);
+            await _service.UpdatePropertyImage(propertyId, imageBytes);
 
-            return File(memoryStream, "application/octet-stream");
+            return File(imageBytes, "application/octet-stream", image.FileName);
         }
 
         /// <summary>
-        /// Edit the price of the property, based on the property identifier
+        /// Update the price of the property, based on the property identifier
         /// </summary>
         /// <param name="propertyId">Property identifier</param>
         /// <param name="price">Property price</param>
-        /// <returns>Property edited</returns>
+        /// <returns>Property updated</returns>
         /// <response code="200">Successfully updated property price</response>
         /// <response code="404">Property not found by identifier, to update the price</response>
         /// <response code="500">Internal server error not updating property price</response>
@@ -117,11 +119,16 @@ namespace RealEstate.Properties.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> EditPropertyPrice(Guid propertyId, [FromQuery] decimal price)
+        public async Task<IActionResult> UpdatePropertyPrice(Guid propertyId, [FromQuery] decimal price)
         {
-            PropertyEntity property = await _service.EditPropertyPrice(propertyId, price);
+            PropertyEntity propertyUpdated = await _service.UpdatePropertyPrice(propertyId, price);
+            PropertyResponse property = _mapper.Map<PropertyResponse>(propertyUpdated);
+            property.PropertyImageId = _service.FindPropertyImage(propertyId)?.PropertyImageId;
+            property.PropertyTraces = await _service.GetTracesByProperty(propertyId)
+                .Select(property => _mapper.Map<PropertyTraceResponse>(property))
+                .ToArrayAsync();
 
-            return Ok(_mapper.Map<PropertyResponse>(property));
+            return Ok(property);
         }
     }
 }

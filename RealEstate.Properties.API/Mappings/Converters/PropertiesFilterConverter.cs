@@ -47,7 +47,7 @@ namespace RealEstate.Properties.API.Mappings.Converters
                         property.PropertyImageId = propertyImages
                             .SingleOrDefault(propertyImage => propertyImage?.PropertyId == property.PropertyId)?.PropertyImageId;
                         property.PropertyTraces = propertyTraces
-                            .Where(propertyTrace => propertyTrace.PropertyId == property.PropertyId);
+                            .Where(propertyTrace => propertyTrace?.PropertyId == property.PropertyId);
 
                         return property;
                     });

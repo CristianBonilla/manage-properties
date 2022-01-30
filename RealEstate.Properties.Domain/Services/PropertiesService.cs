@@ -53,7 +53,7 @@ namespace RealEstate.Properties.Domain.Services
         }
 
         /// <inheritdoc/>
-        public async Task<PropertyImageEntity> AddPropertyImage(Guid propertyId, byte[] image)
+        public async Task UpdatePropertyImage(Guid propertyId, byte[] image)
         {
             PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == propertyId);
             if (propertyImage == null)
@@ -65,13 +65,12 @@ namespace RealEstate.Properties.Domain.Services
                 };
             }
             propertyImage.File = image;
+            _propertyImageRepository.Update(propertyImage);
             await _context.SaveAsync();
-
-            return propertyImage;
         }
 
         /// <inheritdoc/>
-        public async Task<PropertyEntity> EditPropertyPrice(Guid propertyId, decimal price)
+        public async Task<PropertyEntity> UpdatePropertyPrice(Guid propertyId, decimal price)
         {
             PropertyEntity property = _propertyRepository.Find(property => property.PropertyId == propertyId);
             if (property == null)
@@ -80,6 +79,14 @@ namespace RealEstate.Properties.Domain.Services
             await _context.SaveAsync();
 
             return property;
+        }
+
+        /// <inheritdoc/>
+        public PropertyImageEntity FindPropertyImage(Guid propertyId)
+        {
+            PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == propertyId);
+
+            return propertyImage;
         }
 
         /// <inheritdoc/>
@@ -93,7 +100,7 @@ namespace RealEstate.Properties.Domain.Services
             var owners = _ownerRepository.Get().ToAsyncEnumerable();
             await foreach (OwnerEntity owner in owners)
             {
-                var properties = _propertyRepository.Get(property => property.OwnerId == owner.OwnerId).ToAsyncEnumerable();
+                var properties = _propertyRepository.GetByFilter(property => property.OwnerId == owner.OwnerId).ToAsyncEnumerable();
                 await foreach(PropertyEntity property in properties)
                 {
                     PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == property.PropertyId);
@@ -132,6 +139,15 @@ namespace RealEstate.Properties.Domain.Services
                 if (ownerMatch || propertyMatch || propertyTraceMatch)
                     yield return (owner, property, propertyImage, propertyTrace);
             }
+        }
+
+        /// <inheritdoc/>
+        public IAsyncEnumerable<PropertyTraceEntity> GetTracesByProperty(Guid propertyId)
+        {
+            var propertyTraces = _propertyTraceRepository.GetByFilter(propertyTrace => propertyTrace.PropertyId == propertyId)
+                .ToAsyncEnumerable();
+
+            return propertyTraces;
         }
     }
 }

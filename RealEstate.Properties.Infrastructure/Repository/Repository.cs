@@ -97,27 +97,26 @@ namespace RealEstate.Properties.Infrastructure.Repository
         public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entitySet.Any(predicate);
 
         /// <inheritdoc/>
-        public IEnumerable<TEntity> Get() => _entitySet.ToList();
-
-        /// <inheritdoc/>
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter) => _entitySet.Where(filter).ToList();
-
-        /// <inheritdoc/>
-        public IEnumerable<TEntity> Get(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy)
-        {
-            var querySet = _entitySet.AsQueryable();
-
-            return orderBy(querySet).ToList();
-        }
-
-        /// <inheritdoc/>
         public IEnumerable<TEntity> Get(params Expression<Func<TEntity, bool>>[] includes)
         {
+            if (!includes.Any())
+                return _entitySet.ToList();
             var querySet = _entitySet.AsQueryable();
             foreach (var expression in includes)
                 querySet = querySet.Include(expression);
 
             return querySet.ToList();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter) => _entitySet.Where(filter).ToList();
+
+        /// <inheritdoc/>
+        public IEnumerable<TEntity> GetByOrder(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy)
+        {
+            var querySet = _entitySet.AsQueryable();
+
+            return orderBy(querySet).ToList();
         }
     }
 }

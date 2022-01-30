@@ -19,15 +19,22 @@ namespace RealEstate.Properties.API.Mappings
         /// </summary>
         public PropertiesProfile()
         {
-            CreateMap<OwnerEntity, OwnerRequest>();
+            CreateMap<OwnerRequest, OwnerEntity>()
+                .ForMember(member => member.OwnerId, options => options.Ignore());
             CreateMap<OwnerEntity, OwnerResponse>();
-            CreateMap<PropertyEntity, PropertyRequest>();
+            CreateMap<PropertyRequest, PropertyEntity>()
+                .ForMember(member => member.PropertyId, options => options.Ignore())
+                .ForMember(member => member.Owner, options => options.Ignore());
             CreateMap<PropertyEntity, PropertyResponse>()
                 .ForMember(member => member.PropertyImageId, options => options.Ignore())
                 .ForMember(member => member.PropertyTraces, options => options.Ignore());
-            CreateMap<PropertyImageEntity, PropertyImageRequest>();
+            CreateMap<PropertyImageRequest, PropertyImageEntity>()
+                .ForMember(member => member.PropertyImageId, options => options.Ignore())
+                .ForMember(member => member.Property, options => options.Ignore());
             CreateMap<PropertyImageEntity, PropertyImageResponse>();
-            CreateMap<PropertyTraceEntity, PropertyTraceRequest>();
+            CreateMap<PropertyTraceRequest, PropertyTraceEntity>()
+                .ForMember(member => member.PropertyTraceId, options => options.Ignore())
+                .ForMember(member => member.Property, options => options.Ignore());
             CreateMap<PropertyTraceEntity, PropertyTraceResponse>();
             CreateMap<IAsyncEnumerable<(
                 OwnerEntity,
