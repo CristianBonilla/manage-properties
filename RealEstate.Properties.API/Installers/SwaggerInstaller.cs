@@ -43,15 +43,6 @@ namespace RealEstate.Properties.API.Installers
                     Description = "API to get property information, stored from a database",
                     Contact = swagger.Contact
                 });
-                options.AddSecurityDefinition(CommonValues.Bearer, new()
-                {
-                    Description = "JWT Authentication header using the bearer scheme",
-                    Name = "Authentication",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = CommonValues.Bearer,
-                    BearerFormat = "JWT"
-                });
                 OpenApiSecurityScheme apiSecurity = new()
                 {
                     Reference = new OpenApiReference
