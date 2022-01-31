@@ -53,7 +53,7 @@ namespace RealEstate.Properties.Domain.Services
         }
 
         /// <inheritdoc/>
-        public async Task UpdatePropertyImage(Guid propertyId, byte[] image)
+        public async Task UpdatePropertyImage(Guid propertyId, byte[] image, string imageName)
         {
             PropertyImageEntity propertyImage = _propertyImageRepository.Find(propertyImage => propertyImage.PropertyId == propertyId);
             if (propertyImage == null)
@@ -61,11 +61,18 @@ namespace RealEstate.Properties.Domain.Services
                 propertyImage = new()
                 {
                     PropertyId = propertyId,
+                    File = image,
+                    FileName = imageName,
                     Enabled = true
                 };
+                _propertyImageRepository.Create(propertyImage);
             }
-            propertyImage.File = image;
-            _propertyImageRepository.Update(propertyImage);
+            else
+            {
+                propertyImage.File = image;
+                propertyImage.FileName = imageName;
+                _propertyImageRepository.Update(propertyImage);
+            }
             await _context.SaveAsync();
         }
 

@@ -84,6 +84,27 @@ namespace RealEstate.Properties.API.Controllers
         }
 
         /// <summary>
+        /// Get the corresponding property image
+        /// </summary>
+        /// <param name="propertyId">Property identifier</param>
+        /// <returns>Image</returns>
+        /// <response code="200">Successful if it finds the image and gets it</response>
+        /// <response code="404">Not found if the property image does not exist</response>
+        /// <response code="500">Internal server error finding property image</response>
+        [HttpGet("image/{propertyId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetPropertyImage(Guid propertyId)
+        {
+            PropertyImageEntity propertyImage = _service.FindPropertyImage(propertyId);
+            if (propertyImage != null)
+                return File(propertyImage.File, "application/octet-stream", propertyImage.FileName);
+
+            return NotFound();
+        }
+
+        /// <summary>
         /// Update the property image based on the received property identifier
         /// </summary>
         /// <param name="propertyId">Property identifier</param>
@@ -101,7 +122,7 @@ namespace RealEstate.Properties.API.Controllers
             using MemoryStream memoryStream = new();
             await image.CopyToAsync(memoryStream);
             byte[] imageBytes = memoryStream.ToArray();
-            await _service.UpdatePropertyImage(propertyId, imageBytes);
+            await _service.UpdatePropertyImage(propertyId, imageBytes, image.FileName);
 
             return File(imageBytes, "application/octet-stream", image.FileName);
         }

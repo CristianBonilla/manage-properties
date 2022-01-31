@@ -21,6 +21,8 @@ namespace RealEstate.Properties.Domain.EntitiesConfiguration
                 .HasDefaultValueSql("NEWID()");
             builder.Property(property => property.File)
                 .IsRequired();
+            builder.Property(property => property.FileName)
+                .IsRequired();
             builder.Property(property => property.Enabled)
                 .IsRequired();
 

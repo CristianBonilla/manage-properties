@@ -22,7 +22,8 @@ namespace RealEstate.Properties.Contracts.Services
         /// </summary>
         /// <param name="propertyId">Property identifier</param>
         /// <param name="image">Image byte array</param>
-        Task UpdatePropertyImage(Guid propertyId, byte[] image);
+        /// <param name="imageName">Image name</param>
+        Task UpdatePropertyImage(Guid propertyId, byte[] image, string imageName);
 
         /// <summary>
         /// Changes the property price directly in the database

@@ -42,6 +42,16 @@
             <response code="201">Successfully for property created</response>
             <response code="500">Internal server error not creating property</response>
         </member>
+        <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.GetPropertyImage(System.Guid)">
+            <summary>
+            Get the corresponding property image
+            </summary>
+            <param name="propertyId">Property identifier</param>
+            <returns>Image</returns>
+            <response code="200">Successful if it finds the image and gets it</response>
+            <response code="404">Not found if the property image does not exist</response>
+            <response code="500">Internal server error finding property image</response>
+        </member>
         <member name="M:RealEstate.Properties.API.Controllers.PropertiesController.UpdatePropertyImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             Update the property image based on the received property identifier

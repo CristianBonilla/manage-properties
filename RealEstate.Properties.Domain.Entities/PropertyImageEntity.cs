@@ -23,6 +23,11 @@ namespace RealEstate.Properties.Domain.Entities
         public byte[] File { get; set; }
 
         /// <summary>
+        /// Property image file name
+        /// </summary>
+        public string FileName { get; set; }
+
+        /// <summary>
         /// Property image if enabled
         /// </summary>
         public bool Enabled { get; set; }
