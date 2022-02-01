@@ -35,7 +35,7 @@ namespace RealEstate.Properties.API.Mappings.Converters
         {
             IRuntimeMapper mapper = context.Mapper;
             var sources = await source.ToArrayAsync();
-            var owners = sources.Select(property => mapper.Map<OwnerResponse>(property.owner)).Distinct();
+            var owners = sources.Select(property => property.owner).Distinct().Select(mapper.Map<OwnerResponse>).ToArray();
             var properties = sources.Select(property => mapper.Map<PropertyResponse>(property.property));
             var propertyImages = sources.Select(property => mapper.Map<PropertyImageResponse>(property.propertyImage));
             var propertyTraces = sources.Select(property => mapper.Map<PropertyTraceResponse>(property.propertyTrace));

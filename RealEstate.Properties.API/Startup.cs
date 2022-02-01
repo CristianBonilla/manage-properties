@@ -45,6 +45,8 @@ namespace RealEstate.Properties.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint(swagger.UIEndpoint, swagger.Description));
             }
 
+            app.UseCors(CommonValues.AllowOrigins);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
